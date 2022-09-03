@@ -17,6 +17,15 @@ class Block implements IBlock {
 		this.tx = tx;
 		this.timestamp = timestamp;
 	}
+
+	static createGenesisBlock(): Block {
+		return new Block({
+			hash: "0",
+			prevHash: "0",
+			timestamp: new Date(),
+			tx: "0",
+		});
+	}
 }
 
 export default Block;
