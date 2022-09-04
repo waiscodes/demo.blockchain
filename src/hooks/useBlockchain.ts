@@ -30,9 +30,14 @@ const useBlockchain = () => {
 		setBlockchain([...blockchain, { height, timeStamp, tx, previousHash, hash }]);
 	};
 
+	const isValid = () => {
+		return !!blockchain.find((block, index) => index !== 0 && block.previousHash !== blockchain[index - 1].hash);
+	};
+
 	return {
 		blockchain,
 		addBlock,
+		isValid,
 	};
 };
 
