@@ -9,19 +9,25 @@ interface Block {
 	tx: string;
 }
 
+const genesisBlock = {
+	height: 0,
+	timeStamp: new Date(),
+	tx: "Genesis",
+	previousHash: "-------",
+	hash: "Genesis-block",
+};
+
 const useBlockchain = () => {
-	const [blockchain, setBlockchain] = useState<Block[]>([
-		{ height: 0, hash: "Genesis-block", previousHash: "-------", timeStamp: new Date(), tx: "Genesis" },
-	]);
+	const [blockchain, setBlockchain] = useState<Block[]>([genesisBlock]);
 
 	const addBlock = (tx: string) => {
 		const prevBlock = blockchain[blockchain.length - 1];
-		const timestamp = new Date();
-		const prevHash = prevBlock.hash;
+		const timeStamp = new Date();
+		const previousHash = prevBlock.hash;
 		const height = prevBlock.height + 1;
-		const hash = SHA256(`${height}${prevHash}${timestamp}${tx}`).toString();
+		const hash = SHA256(`${height}${previousHash}${timeStamp}${tx}`).toString();
 
-		setBlockchain([...blockchain, { height, hash, previousHash: prevHash, timeStamp: timestamp, tx }]);
+		setBlockchain([...blockchain, { height, timeStamp, tx, previousHash, hash }]);
 	};
 
 	return {
