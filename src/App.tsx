@@ -1,16 +1,14 @@
+import Button from "@mui/material/Button";
 import React from "react";
-import Blockchain from "./blockchain";
 import Block from "./components/Block";
+import useBlockchain from "./hooks/useBlockchain";
 
 const App: React.FC = (): JSX.Element => {
-	const myChain = new Blockchain();
-	myChain.addBlock("second block");
-	myChain.addBlock("second block");
-	myChain.addBlock("second block");
-
+	const { blockchain, addBlock } = useBlockchain();
 	return (
 		<>
-			{myChain.chain.map((block) => (
+			<Button onClick={() => addBlock("Hello")}>Add Block</Button>
+			{blockchain.map((block) => (
 				<Block key={block.height} block={block} />
 			))}
 		</>

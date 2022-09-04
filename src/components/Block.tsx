@@ -1,5 +1,6 @@
 import React from "react";
 import { IBlock } from "../blockchain/Block";
+import Card from "@mui/material/Card";
 
 interface Props {
 	block: IBlock;
