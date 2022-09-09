@@ -1,9 +1,9 @@
 import React from "react";
-import { IBlock } from "../blockchain/Block";
+import { default as BlockType } from "../blockchain/Block";
 import Card from "@mui/material/Card";
 
 interface Props {
-	block: IBlock;
+	block: BlockType;
 }
 
 const Block: React.FC<Props> = ({ block }): JSX.Element => {
