@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Block from "./Block";
 
 const useChain = () => {
 	const [chain, setChain] = useState<Block[]>([Block.createGenesisBlock()]);
+	const [isChainValid, setIsChainValid] = useState<boolean>(true);
 
 	const addBlock = (tx: string) => {
 		const newBlock = Block.mineBlock(chain[chain.length - 1], tx);
@@ -22,9 +23,9 @@ const useChain = () => {
 		return chain[height];
 	};
 
-	const isChainValid = () => {
-		return chain.every((block, index) => Block.isValidBlock(chain[index - 1], block));
-	};
+	useEffect(() => {
+		setIsChainValid(chain.every((block, index) => Block.isValidBlock(chain[index - 1], block)));
+	}, [chain.length]);
 
 	return {
 		chain,
