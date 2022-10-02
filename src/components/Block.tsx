@@ -1,6 +1,5 @@
 import React from "react";
 import { default as BlockType } from "../blockchain/Block";
-import Card from "@mui/material/Card";
 
 interface Props {
 	block: BlockType;
