@@ -4,7 +4,7 @@ import Block from "./components/Block";
 
 const App: React.FC = (): JSX.Element => {
 	const [tx, setTx] = useState<string>("");
-	const { chain, addBlock, isChainValid } = useChain();
+	const { chain, addBlock, updateBlockData, isChainValid } = useChain();
 
 	const submitTx = () => {
 		addBlock(tx);
@@ -13,10 +13,12 @@ const App: React.FC = (): JSX.Element => {
 
 	return (
 		<>
+			{isChainValid ? <p>Chain is valid</p> : <p>Chain is not valid</p>}
 			<input value={tx} onChange={(e) => setTx(e.target.value)} />
 			<button onClick={() => submitTx()}>Add Block</button>
+
 			{chain.map((block, index) => (
-				<Block key={index} block={block} />
+				<Block key={index} updateBlockData={updateBlockData} block={block} />
 			))}
 		</>
 	);

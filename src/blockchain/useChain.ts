@@ -23,6 +23,14 @@ const useChain = () => {
 		return chain[height];
 	};
 
+	const updateBlockData = (height: number, tx: string) => {
+		const block = getBlockByHeight(height);
+		if (block) {
+			block.tx = tx;
+			block.hash = Block.getBlockHash(block);
+		}
+	};
+
 	useEffect(() => {
 		setIsChainValid(chain.every((block, index) => Block.isValidBlock(chain[index - 1], block)));
 	}, [chain.length]);
@@ -34,6 +42,7 @@ const useChain = () => {
 		getBlockByTx,
 		getBlockByHash,
 		getBlockByHeight,
+		updateBlockData,
 	};
 };
 
