@@ -16,12 +16,13 @@ const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 	return (
 		<>
 			<div>
-				<p>{block.height}</p>
-				<p>{block.difficulty}</p>
-				<p>{block.nonce}</p>
-				<p>{block.timestamp}</p>
-				<p>{block.prevHash}</p>
-				<p>{block.hash}</p>
+				<p>Height: {block.height}</p>
+				<p>Difficulty: {block.difficulty}</p>
+				<p>Nonce: {block.nonce}</p>
+
+				<p>Timestamp: {block.timestamp}</p>
+				<p>Previous Hash: {block.prevHash}</p>
+				<p>Hash: {block.hash}</p>
 				<input type="text" name="tx" value={tx} onChange={(e) => handleTxChange(e)} />
 			</div>
 		</>

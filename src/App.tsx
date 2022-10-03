@@ -6,21 +6,25 @@ const App: React.FC = (): JSX.Element => {
 	const [tx, setTx] = useState<string>("");
 	const { chain, addBlock, updateBlockData, isChainValid } = useChain();
 
-	const submitTx = () => {
+	const submitTx = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 		addBlock(tx);
 		setTx("");
 	};
 
 	return (
-		<>
+		<main>
 			{isChainValid ? <p>Chain is valid</p> : <p>Chain is not valid</p>}
-			<input value={tx} onChange={(e) => setTx(e.target.value)} />
-			<button onClick={() => submitTx()}>Add Block</button>
-
-			{chain.map((block, index) => (
-				<Block key={index} updateBlockData={updateBlockData} block={block} />
-			))}
-		</>
+			<form onSubmit={submitTx}>
+				<input value={tx} onChange={(e) => setTx(e.target.value)} />
+				<button>Add Block</button>
+			</form>
+			<div>
+				{chain.map((block, index) => (
+					<Block key={index} updateBlockData={updateBlockData} block={block} />
+				))}
+			</div>
+		</main>
 	);
 };
 
