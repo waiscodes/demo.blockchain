@@ -15,7 +15,7 @@ const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 	};
 	return (
 		<>
-			<div>
+			<div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 				<p>Height: {block.height}</p>
 				<p>Difficulty: {block.difficulty}</p>
 				<p>Nonce: {block.nonce}</p>
