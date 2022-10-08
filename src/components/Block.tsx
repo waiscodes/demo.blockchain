@@ -15,14 +15,14 @@ const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 	};
 	return (
 		<>
-			<div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+			<div className="p-6 max-w-sm overflow-scroll bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 				<p>Height: {block.height}</p>
 				<p>Difficulty: {block.difficulty}</p>
 				<p>Nonce: {block.nonce}</p>
 
 				<p>Timestamp: {block.timestamp}</p>
-				<p>Previous Hash: {block.prevHash}</p>
-				<p>Hash: {block.hash}</p>
+				<p className="whitespace-nowrap">Previous Hash: {block.prevHash}</p>
+				<p className="whitespace-nowrap">Hash: {block.hash}</p>
 				<input type="text" name="tx" value={tx} onChange={(e) => handleTxChange(e)} />
 			</div>
 		</>
