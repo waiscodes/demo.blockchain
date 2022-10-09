@@ -10,7 +10,7 @@ const GENESIS = {
 	tx: "Hello World",
 };
 
-const BLOCK_TIME = 1000;
+const BLOCK_TIME = 14000;
 
 class Block {
 	public height: number;
@@ -62,7 +62,7 @@ class Block {
 	};
 
 	static adjustDifficulty = (prevDifficulty: number, prevTimestamp: number, currTimestamp: number): number => {
-		if (prevDifficulty <= 4) return 4;
+		if (prevDifficulty < 4) return prevDifficulty + 1;
 
 		if (currTimestamp - prevTimestamp > BLOCK_TIME) {
 			return prevDifficulty - 1;
