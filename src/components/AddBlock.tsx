@@ -3,8 +3,9 @@ import Block from "../blockchain/Block";
 
 interface Props {
 	addBlock: (tx: string) => void;
+	prevBlock: Block;
 }
-const AddBlock: React.FC<Props> = ({ addBlock }) => {
+const AddBlock: React.FC<Props> = ({ addBlock, prevBlock }) => {
 	const [tx, setTx] = useState<string>("");
 	const [hash, setHash] = useState("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"); // SHA256 hash of empty string
 
@@ -14,9 +15,9 @@ const AddBlock: React.FC<Props> = ({ addBlock }) => {
 		setTx("");
 	};
 
-	const handleChange = (value: string) => {
-		setTx(value);
-		setHash(Block.getBlockHash(value));
+	const handleChange = (tx: string) => {
+		setTx(tx);
+		setHash(Block.getBlockHash(tx));
 	};
 
 	return (
@@ -31,6 +32,18 @@ const AddBlock: React.FC<Props> = ({ addBlock }) => {
 				<input
 					type="text"
 					value={hash}
+					onChange={() => null}
+					className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					disabled
+				/>
+			</div>
+			<div className="flex my-2">
+				<span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+					Previous Hash
+				</span>
+				<input
+					type="text"
+					value={prevBlock.hash}
 					onChange={() => null}
 					className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					disabled
