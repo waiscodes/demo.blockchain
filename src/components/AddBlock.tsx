@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Block from "../blockchain/Block";
 
 interface Props {
 	addBlock: (tx: string) => void;
 }
 const AddBlock: React.FC<Props> = ({ addBlock }) => {
 	const [tx, setTx] = useState<string>("");
+	const [hash, setHash] = useState("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"); // SHA256 hash of empty string
 
 	const submitTx = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -12,20 +14,34 @@ const AddBlock: React.FC<Props> = ({ addBlock }) => {
 		setTx("");
 	};
 
+	const handleChange = (value: string) => {
+		setTx(value);
+		setHash(Block.getBlockHash(value));
+	};
+
 	return (
 		<form
 			onSubmit={submitTx}
 			className="p-6 m-3 overflow-scroll bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
 		>
-			<label htmlFor="add-block" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
-				Block Data
-			</label>
+			<div className="flex my-2">
+				<span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+					Hash
+				</span>
+				<input
+					type="text"
+					value={hash}
+					onChange={() => null}
+					className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					disabled
+				/>
+			</div>
 			<textarea
 				id="add-block"
 				rows={3}
 				className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 				placeholder="Your message..."
-				onChange={(e) => setTx(e.target.value)}
+				onChange={(e) => handleChange(e.target.value)}
 				value={tx}
 			></textarea>
 			<button

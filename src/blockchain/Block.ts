@@ -31,8 +31,12 @@ class Block {
 		this.tx = tx;
 	}
 
-	static getBlockHash = (block: Block): string => {
-		return sha256(JSON.stringify(block)).toString();
+	static getBlockHash = (data: Block | string): string => {
+		if (typeof data === "object") {
+			data = JSON.stringify(data);
+		}
+
+		return sha256(data).toString();
 	};
 
 	static createGenesisBlock = (): Block => {
