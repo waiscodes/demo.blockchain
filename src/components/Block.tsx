@@ -9,6 +9,8 @@ interface Props {
 const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 	const [tx, setTx] = React.useState<string>(block.tx);
 
+	const timestamp = new Date(block.timestamp).toLocaleString();
+
 	const handleTxChange = (tx: string) => {
 		setTx(tx);
 		updateBlockData(block.height, tx);
@@ -18,10 +20,24 @@ const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 		<>
 			<div className="p-6 m-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 				<div className="block-header">
-					<p>Height: {block.height}</p>
-					<p>Difficulty: {block.difficulty}</p>
-					<p>Nonce: {block.nonce}</p>
-					<p>Timestamp: {block.timestamp}</p>
+					<div className="flex w-full justify-between border border-gray-200 rounded">
+						<div className="height text-center border-r flex-1">
+							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Height</p>
+							<p className="text-3xl">{block.height}</p>
+						</div>
+						<div className="difficulty text-center border-r flex-1">
+							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Difficulty</p>
+							<p className="text-3xl">{block.difficulty}</p>
+						</div>
+						<div className="nonce text-center border-r flex-1">
+							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Nonce</p>
+							<p className="text-3xl">{block.nonce}</p>
+						</div>
+						<div className="time text-center flex-1">
+							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Timestamp</p>
+							<p>{timestamp}</p>
+						</div>
+					</div>
 
 					<div className="hashes">
 						<div className="flex my-2">
