@@ -9,7 +9,7 @@ const App: React.FC = (): JSX.Element => {
 	return (
 		<main className="text-white">
 			<AddBlock addBlock={addBlock} />
-			<div>
+			<div className="flex flex-col-reverse">
 				{chain.map((block, index) => (
 					<Block key={index} updateBlockData={updateBlockData} block={block} />
 				))}
