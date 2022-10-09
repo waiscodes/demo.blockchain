@@ -25,6 +25,7 @@ const AddBlock: React.FC<Props> = ({ addBlock, prevBlock }) => {
 			onSubmit={submitTx}
 			className="p-6 m-3 overflow-scroll bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
 		>
+			<h3 className="text-4xl font-semibold text-center mb-4">Add New Block</h3>
 			<div className="flex my-2">
 				<span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
 					Hash
@@ -61,7 +62,7 @@ const AddBlock: React.FC<Props> = ({ addBlock, prevBlock }) => {
 				type="submit"
 				className="w-full bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 my-2"
 			>
-				+ Add New Block
+				Mine Block
 			</button>
 		</form>
 	);
