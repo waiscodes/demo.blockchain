@@ -58,7 +58,7 @@ class Block {
 	};
 
 	static adjustDifficulty = (prevDifficulty: number, prevTimestamp: number, currTimestamp: number): number => {
-		if (prevDifficulty < 1) return 1;
+		if (prevDifficulty <= 4) return 4;
 
 		if (currTimestamp - prevTimestamp > BLOCK_TIME) {
 			return prevDifficulty - 1;
