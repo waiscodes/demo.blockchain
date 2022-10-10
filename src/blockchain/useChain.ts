@@ -28,6 +28,7 @@ const useChain = () => {
 		if (block) {
 			block.tx = tx;
 			block.hash = Block.getBlockHash(block);
+			setBrokenBlockHeight(validateChain());
 		}
 	};
 
