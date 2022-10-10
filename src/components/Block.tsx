@@ -4,9 +4,10 @@ import { default as BlockType } from "../blockchain/Block";
 interface Props {
 	block: BlockType;
 	updateBlockData: (height: number, tx: string) => void;
+	brokenBlockHeight: number;
 }
 
-const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
+const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): JSX.Element => {
 	const [tx, setTx] = React.useState<string>(block.tx);
 
 	const timestamp = new Date(block.timestamp).toLocaleString();
@@ -16,9 +17,15 @@ const Block: React.FC<Props> = ({ block, updateBlockData }): JSX.Element => {
 		updateBlockData(block.height, tx);
 	};
 
+	const isBrokenBlock = brokenBlockHeight !== -1 && block.hash !== "Genesis" && block.height >= brokenBlockHeight;
+
 	return (
 		<>
-			<div className="p-6 m-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+			<div
+				className={`p-6 m-3 bg-white rounded-lg border ${
+					isBrokenBlock ? "border-red-600" : "border-gray-200 dark:border-gray-700"
+				} shadow-md dark:bg-gray-800`}
+			>
 				<div className="block-header">
 					<div className="flex w-full justify-between border border-gray-200 rounded">
 						<div className="height text-center border-r flex-1">

@@ -3,7 +3,7 @@ import Block from "./Block";
 
 const useChain = () => {
 	const [chain, setChain] = useState<Block[]>([Block.createGenesisBlock()]);
-	const [isChainValid, setIsChainValid] = useState<boolean>(true);
+	const [brokenBlockHeight, setBrokenBlockHeight] = useState<number>(-1);
 
 	const addBlock = (tx: string) => {
 		const newBlock = Block.mineBlock(chain[chain.length - 1], tx);
@@ -31,13 +31,18 @@ const useChain = () => {
 		}
 	};
 
+	const validateChain = () => {
+		const brokenBlock = chain.find((block, index) => !Block.isValidBlock(chain[index - 1], block));
+		return brokenBlock?.height ?? -1;
+	};
+
 	useEffect(() => {
-		setIsChainValid(chain.every((block, index) => Block.isValidBlock(chain[index - 1], block)));
+		setBrokenBlockHeight(validateChain());
 	}, [chain.length]);
 
 	return {
 		chain,
-		isChainValid,
+		brokenBlockHeight,
 		addBlock,
 		getBlockByTx,
 		getBlockByHash,
