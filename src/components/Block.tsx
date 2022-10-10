@@ -17,7 +17,7 @@ const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): 
 		updateBlockData(block.height, tx);
 	};
 
-	const isBrokenBlock = brokenBlockHeight !== -1 && block.hash !== "Genesis" && block.height >= brokenBlockHeight;
+	const isBrokenBlock = brokenBlockHeight !== -1 && block.height !== 0 && block.height >= brokenBlockHeight;
 
 	return (
 		<>
@@ -47,7 +47,7 @@ const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): 
 					</div>
 
 					<div className="hashes">
-						<div className="flex my-2">
+						<div className={`flex my-2 ${brokenBlockHeight === block.height && "border border-red-600 rounded-lg"}`}>
 							<span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
 								Hash
 							</span>
@@ -59,7 +59,11 @@ const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): 
 								disabled
 							/>
 						</div>
-						<div className="flex my-2">
+						<div
+							className={`flex my-2 ${
+								brokenBlockHeight === block.height - 1 && block.height !== 0 && "border border-red-600 rounded-lg"
+							}`}
+						>
 							<span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
 								Previous Hash
 							</span>

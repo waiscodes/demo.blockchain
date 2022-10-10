@@ -4,10 +4,10 @@ const GENESIS = {
 	height: 0,
 	nonce: 0,
 	hash: "Genesis",
-	prevHash: "",
+	prevHash: "000000000000000000000000000000000000000000000000000000000000000000",
 	timestamp: +new Date("2015-07-30"),
 	difficulty: 4,
-	tx: "Hello World",
+	tx: "Genesis Block",
 };
 
 const BLOCK_TIME = 14000;
