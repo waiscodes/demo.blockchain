@@ -7,7 +7,7 @@ const App: React.FC = (): JSX.Element => {
 	const { chain, addBlock, updateBlockData, brokenBlockHeight } = useChain();
 
 	return (
-		<main className="m-auto container max-w-3xl text-white">
+		<main className="m-auto container max-w-2xl text-white">
 			<AddBlock addBlock={addBlock} prevBlock={chain[chain.length - 1]} />
 			<div className="flex flex-col-reverse">
 				{chain.map((block, index) => (
