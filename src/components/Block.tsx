@@ -11,6 +11,7 @@ const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): 
 	const [tx, setTx] = React.useState<string>(block.tx);
 
 	const timestamp = new Date(block.timestamp).toLocaleString();
+	const [date, time] = timestamp.split(",");
 
 	const handleTxChange = (tx: string) => {
 		setTx(tx);
@@ -18,31 +19,37 @@ const Block: React.FC<Props> = ({ block, updateBlockData, brokenBlockHeight }): 
 	};
 
 	const isBrokenBlock = brokenBlockHeight !== -1 && block.height !== 0 && block.height >= brokenBlockHeight;
+	const nonceLength = block.nonce.toString().length;
 
 	return (
 		<>
 			<div
-				className={`p-6 m-3 bg-white rounded-lg border ${
+				className={`p-6 m-3 bg-white rounded-2xl border ${
 					isBrokenBlock ? "border-red-600" : "border-gray-200 dark:border-gray-700"
 				} shadow-md dark:bg-gray-800`}
 			>
 				<div className="block-header">
-					<div className="flex w-full justify-between border border-gray-200 rounded">
+					<div className="flex w-full justify-between border border-gray-200 rounded-xl">
 						<div className="height text-center border-r flex-1">
-							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Height</p>
-							<p className="text-3xl">{block.height}</p>
+							<p className="text-xs xs:text-sm font-medium text-gray-900 dark:text-gray-400">Height</p>
+							<p className="text-2xl xs:text-3xl">{block.height}</p>
 						</div>
 						<div className="difficulty text-center border-r flex-1">
-							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Difficulty</p>
-							<p className="text-3xl">{block.difficulty}</p>
+							<p className="text-xs xs:text-sm font-medium text-gray-900 dark:text-gray-400">Difficulty</p>
+							<p className="text-2xl xs:text-3xl">{block.difficulty}</p>
 						</div>
 						<div className="nonce text-center border-r flex-1">
-							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Nonce</p>
-							<p className="text-3xl">{block.nonce}</p>
+							<p className="text-xs xs:text-sm font-medium text-gray-900 dark:text-gray-400">Nonce</p>
+							<p className={`${nonceLength > 4 ? "text-lg xs:text-sm" : "text-2xl xs:text-3xl"}text-2xl xs:text-3xl`}>
+								{block.nonce}
+							</p>
 						</div>
 						<div className="time text-center flex-1">
-							<p className="text-sm font-medium text-gray-900 dark:text-gray-400">Timestamp</p>
-							<p>{timestamp}</p>
+							<p className="text-xs xs:text-sm font-medium text-gray-900 dark:text-gray-400">Timestamp</p>
+							<p className="text-xs xs:text-sm xs:mb-2">
+								<span className="block">{date}</span>
+								<span className="block">{time}</span>
+							</p>
 						</div>
 					</div>
 

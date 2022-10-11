@@ -23,7 +23,7 @@ const AddBlock: React.FC<Props> = ({ addBlock, prevBlock }) => {
 	return (
 		<form
 			onSubmit={submitTx}
-			className="p-6 m-3 overflow-scroll bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+			className="p-6 m-3 overflow-scroll bg-white rounded-2xl border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
 		>
 			<h3 className="text-4xl font-semibold text-center mb-4">Add New Block</h3>
 			<div className="flex my-2">
